@@ -23,6 +23,11 @@
                         <i class="fas fa-users"></i> Usuarios
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= ($vista === 'importar_precios') ? 'active' : '' ?>" href="index2.php?vista=importar_precios">
+                        <i class="fas fa-file-import"></i> Importar Precios
+                    </a>
+                </li>
             </ul>
 
             <!-- Usuario y cerrar sesión -->

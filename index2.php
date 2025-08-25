@@ -82,6 +82,8 @@ $vista = $_GET['vista'] ?? 'listar_productos';
             include("usuarios.php");
         } elseif ($vista === 'editar_producto' && isset($_GET['id'])) {
             include("editar_producto.php");
+        } elseif ($vista === 'importar_precios') {
+            include("importar_precios.php");
         } else {
             include("listar_productos.php");
         }

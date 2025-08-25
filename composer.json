@@ -1,0 +1,9 @@
+{
+    "name": "fabrica_ba/app",
+    "description": "Aplicación Fabrica BA",
+    "license": "proprietary",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.29",
+        "smalot/pdfparser": "^1.0"
+    }
+}
