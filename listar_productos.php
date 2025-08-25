@@ -1,7 +1,6 @@
 <?php
 // Conexión a la base de datos
 require_once('conexion.php');
-include('navbar.php');
 
 // Parámetros de búsqueda y paginación
 $search = $_GET['search'] ?? '';
