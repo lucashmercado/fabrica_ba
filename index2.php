@@ -31,7 +31,7 @@ $vista = $_GET['vista'] ?? 'listar_productos';
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
     <!-- Estilo adicional para evitar que el contenido quede debajo del navbar -->
     <style>
