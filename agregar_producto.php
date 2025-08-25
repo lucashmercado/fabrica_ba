@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container my-4">
+<div class="container mt-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-dark text-white">
             <h3 class="mb-0">➕ Agregar Producto</h3>
