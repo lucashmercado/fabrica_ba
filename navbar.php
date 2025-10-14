@@ -28,6 +28,11 @@
                         <i class="fas fa-file-import"></i> Importar Precios
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="export_pdf.php">
+                        <i class="fas fa-file-pdf"></i> Exportar PDF
+                    </a>
+                </li>
             </ul>
 
             <!-- Usuario y cerrar sesión -->

@@ -5,7 +5,7 @@ require_once('conexion.php');
 // Parámetros de búsqueda y paginación
 $search = $_GET['search'] ?? '';
 $page   = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
-$limit  = isset($_GET['limit']) ? max(1, (int) $_GET['limit']) : 10;
+$limit  = isset($_GET['limit']) ? max(1, (int) $_GET['limit']) : 5;
 $order  = $_GET['order'] ?? 'nombre';
 $dir    = $_GET['dir'] ?? 'asc';
 
@@ -28,6 +28,7 @@ if ($search !== '') {
 $totalQuery = $conexion->query("SELECT COUNT(*) AS total FROM productos $where");
 $total      = $totalQuery->fetch_assoc()['total'] ?? 0;
 $totalPages = $limit > 0 ? (int) ceil($total / $limit) : 1;
+$page       = min($page, max(1, $totalPages)); // evitar overflow de página
 
 // Consulta de productos
 $query     = "SELECT * FROM productos $where ORDER BY $order $dir LIMIT $limit OFFSET $offset";
@@ -42,13 +43,12 @@ function build_query(array $params): string {
 }
 ?>
 
-<div class="container mt-5">
+<div class="container mt-7">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-dark text-white">
             <h3 class="mb-0">📦 Listado de Productos</h3>
         </div>
         <div class="card-body">
-
             <form class="mb-3" method="GET" action="index2.php">
                 <input type="hidden" name="vista" value="listar_productos">
                 <input type="hidden" name="order" value="<?= htmlspecialchars($order) ?>">
@@ -100,14 +100,44 @@ function build_query(array $params): string {
                 </tbody>
             </table>
 
+            <!-- Nueva paginación con flechas -->
             <nav>
-                <ul class="pagination">
-                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                            <a class="page-link" href="<?= build_query(['page' => $i]) ?>"><?= $i ?></a>
-                        </li>
-                    <?php endfor; ?>
-                </ul>
+              <ul class="pagination justify-content-center">
+                <!-- Primera -->
+                <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                  <a class="page-link" href="<?= build_query(['page' => 1]) ?>" aria-label="Primera">
+                    &laquo;&laquo;
+                  </a>
+                </li>
+
+                <!-- Anterior -->
+                <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                  <a class="page-link" href="<?= build_query(['page' => $page - 1]) ?>" aria-label="Anterior">
+                    &lsaquo;
+                  </a>
+                </li>
+
+                <!-- Indicador de página -->
+                <li class="page-item disabled">
+                  <span class="page-link">
+                    Página <?= $page ?> / <?= $totalPages ?>
+                  </span>
+                </li>
+
+                <!-- Siguiente -->
+                <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                  <a class="page-link" href="<?= build_query(['page' => $page + 1]) ?>" aria-label="Siguiente">
+                    &rsaquo;
+                  </a>
+                </li>
+
+                <!-- Última -->
+                <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                  <a class="page-link" href="<?= build_query(['page' => $totalPages]) ?>" aria-label="Última">
+                    &raquo;&raquo;
+                  </a>
+                </li>
+              </ul>
             </nav>
 
         </div>
