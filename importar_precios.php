@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['archivo'])) {
             $stock = isset($fila[2]) ? trim($fila[2]) : null;
             procesar_producto($id, $costo, $stock, $actualizados, $omitidos, $log_entries, $conexion);
         }
+        // Limpiar memoria
     } elseif ($ext === 'pdf') {
         $parser = new \Smalot\PdfParser\Parser();
         $pdf    = $parser->parseFile($tmp);
